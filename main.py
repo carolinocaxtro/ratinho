@@ -27,7 +27,7 @@ def read_maze(file_name):
 # Encontrar a posição inicial do rato (ponto vermelho) e do queijo (ponto azul)
 def find_positions(maze):
     for y in range(len(maze)):
-        for x in range(len(maze[y])):
+        for x in range(len(maze[0])):
             if maze[y][x] == 'e':
                 rat_pos = (x, y)
             elif maze[y][x] == 'm':
@@ -36,15 +36,12 @@ def find_positions(maze):
 
 # Desenhar o labirinto
 def draw_maze(maze):
-    cell_width = WIDTH // len(maze[0])
-    cell_height = HEIGHT // len(maze)
+    cell_width = WIDTH / len(maze[0])
+    cell_height = HEIGHT / len(maze)
 
     for y in range(len(maze)):
-        for x in range(len(maze[y])):
-            if maze[y][x] == '1':
-                color = WHITE
-            else:
-                color = BLACK
+        for x in range(len(maze[0])):
+            color = WHITE if maze[y][x] == '1' else BLACK
             pygame.draw.rect(screen, color, (x * cell_width, y * cell_height, cell_width, cell_height))
 
             if maze[y][x] == 'e':
@@ -73,7 +70,7 @@ def solve_maze(maze, start, end):
                 if 0 <= new_x < len(maze[0]) and 0 <= new_y < len(maze) and maze[new_y][new_x] != '1':
                     stack.append((new_x, new_y))
                     maze[new_y][new_x] = '.'
-                    pygame.draw.rect(screen, GREEN, (new_x * (WIDTH // len(maze[0])), new_y * (HEIGHT // len(maze)), WIDTH // len(maze[0]), HEIGHT // len(maze)))
+                    pygame.draw.rect(screen, GREEN, (new_x * (WIDTH / len(maze[0])), new_y * (HEIGHT / len(maze)), WIDTH / len(maze[0]), HEIGHT / len(maze)))
                     pygame.display.flip()
                     clock.tick(10)
     return False
@@ -105,4 +102,6 @@ while running:
 
 pygame.quit()
 sys.exit()
+
+
 
