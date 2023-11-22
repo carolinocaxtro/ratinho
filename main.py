@@ -5,7 +5,7 @@ from collections import deque
 
 WIDTH, HEIGHT = 400, 400
 
-# Cores
+
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
