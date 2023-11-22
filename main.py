@@ -2,7 +2,7 @@ import pygame
 import sys
 from collections import deque
 
-# Tamanho da janela
+
 WIDTH, HEIGHT = 400, 400
 
 # Cores
@@ -12,19 +12,19 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-# Inicialização do Pygame
+
 pygame.init()
 pygame.display.set_caption("Rat in a Maze")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-# Lógica para ler o labirinto a partir de um arquivo
+
 def read_maze(file_name):
     with open(file_name, 'r') as file:
         maze = [list(line.strip()) for line in file.readlines()]
     return maze
 
-# Encontrar a posição inicial do rato (ponto vermelho) e do queijo (ponto azul)
+
 def find_positions(maze):
     for y in range(len(maze)):
         for x in range(len(maze[0])):
@@ -34,7 +34,7 @@ def find_positions(maze):
                 cheese_pos = (x, y)
     return rat_pos, cheese_pos
 
-# Desenhar o labirinto
+
 def draw_maze(maze):
     cell_width = WIDTH / len(maze[0])
     cell_height = HEIGHT / len(maze)
@@ -51,7 +51,7 @@ def draw_maze(maze):
 
     pygame.display.flip()
 
-# Encontra o caminho no labirinto utilizando pilhas
+
 def solve_maze(maze, start, end):
     directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
     stack = deque()
@@ -75,22 +75,22 @@ def solve_maze(maze, start, end):
                     clock.tick(10)
     return False
 
-# Carrega o labirinto do arquivo 'labirinto2.txt'
+
 maze = read_maze('labirinto2.txt')
 
-# Desenha o labirinto inicial
+
 draw_maze(maze)
 
-# Encontra as posições iniciais do rato e do queijo
+
 rat_pos, cheese_pos = find_positions(maze)
 
-# Resolução do labirinto
+
 if solve_maze(maze, rat_pos, cheese_pos):
     print("Caminho encontrado!")
 else:
     print("Caminho não encontrado!")
 
-# Loop principal do Pygame
+
 running = True
 while running:
     for event in pygame.event.get():
